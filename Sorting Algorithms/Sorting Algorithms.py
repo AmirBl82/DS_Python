@@ -27,6 +27,7 @@ def insertionSort(list):
         list[j+1] = key
     print(list)
 
+# Time Complexity of Merge function is O(n)
 def merge(list, left, mid, right):
     n1 = mid - left + 1
     n2 = right - mid
@@ -60,9 +61,30 @@ def merge(list, left, mid, right):
         list[k] = R[j]
         j += 1
         k += 1
-        
+
+# Time Complexity of Merge Sort is O(nlogn)        
 def mergeSort(list, left, right):
-    return
+    if left < right:
+        mid = (left+(right-1))//2
+        mergeSort(list, left, mid)
+        mergeSort(list, mid+1, right)
+        merge(list, left, mid, right)
+    return list
+
+# Time Complexity of Quick Sort is O(nlogn)
+def quickSort(list):
+    if len(list) <= 1:
+        return list
+    else:
+        pivot = list[0]  
+        left = [x for x in list if x < pivot]
+        middle = [x for x in list if x == pivot]
+        right = [x for x in list if x > pivot]
+        return quickSort(left) + middle + quickSort(right)
+
+
+
+
 
     
 
@@ -70,11 +92,14 @@ def mergeSort(list, left, right):
 
 
 
-new_list = [6,1,4,9,8,2,3,5,7]
+new_list = [6,1,4,9,8,2,3,5,7,6]
 bubbleSort(new_list)
 bubbleSort([1,4,3,2,5,7,6,9,8,10])
 selectionSort(new_list)
 selectionSort([1,4,3,2,5,7,6,9,8,10])
 insertionSort(new_list)
 insertionSort([1,4,3,2,5,7,6,9,8,10])
-
+print(mergeSort(new_list, 0, 8))
+sorted_list = quickSort(new_list)
+print(new_list)
+print(quickSort(new_list))
