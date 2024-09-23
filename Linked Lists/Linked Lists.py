@@ -14,6 +14,7 @@ class LinkedList:
     #     self.tail = new_node
     #     self.length = 1
     
+# Time Complexity of Creating an empty Linked List is O(1)   
     def __init__(self):
         self.head = None
         self.tail = None
