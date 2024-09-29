@@ -44,7 +44,49 @@ class Circular_linkedList:
             new_node.next = self.head
             self.tail = new_node
         self.length += 1
-
+    
+    # Insert an Element at the beginning of Circular Linked List
+    # Time Complexity is O(1)
+    def prepend(self,value):
+        new_node = Node(value)
+        if self.length == 0:
+            self.head = new_node
+            self.tail = new_node
+            new_node.next = new_node
+        else:
+            new_node.next = self.head
+            self.head = new_node
+            self.tail.next = new_node
+        self.length += 1
+    
+    # Insert an Element at any given index in Circular Linked List
+    # Time Complexity is O(n)
+    def insert(self,index,value):
+        new_node = Node(value)
+        if index < 0:
+            index = self.length + index + 1
+        if index > self.length:
+            index = self.length
+        if index == 0:
+            if self.length == 0:
+                self.head = new_node
+                self.tail = new_node
+                new_node.next = self.head 
+            else:
+                new_node.next = self.head
+                self.head = new_node
+                self.tail.next = new_node
+        elif index == self.length:
+            self.tail.next = new_node
+            self.tail = new_node
+            new_node.next = self.head
+        else:
+            temp_node = self.head
+            for _ in range(index-1):
+                temp_node = temp_node.next
+            new_node.next = temp_node.next
+            temp_node.next = new_node
+        self.length += 1
 
 
 
@@ -52,5 +94,14 @@ CLinkedList = Circular_linkedList()
 CLinkedList.append(10)
 CLinkedList.append(20)
 print(CLinkedList.head.value)
+print(CLinkedList.tail.value)
+print(CLinkedList)
+CLinkedList.prepend(40)
+print(CLinkedList)
+CLinkedList.prepend(50)
+print(CLinkedList)
+CLinkedList.insert(0, 30)
+print(CLinkedList)
+CLinkedList.insert(-6, 60)
 print(CLinkedList.tail.value)
 print(CLinkedList)
