@@ -3,6 +3,9 @@ class Node:
     def __init__(self,value):
         self.value = value
         self.next = None
+    
+    def __str__(self):
+        return str(self.value)
 
 # Time Complexity of Creating a Circular Linked List with one Node is O(1)
 class Circular_linkedList:
@@ -87,6 +90,43 @@ class Circular_linkedList:
             new_node.next = temp_node.next
             temp_node.next = new_node
         self.length += 1
+    
+    # Traversal of Circular Linked List
+    # Time Complexity is O(n)
+    def traverse(self):
+        if not self.head:  # If the list is empty
+            return
+        current_node = self.head
+        while current_node is not None:
+            print(current_node.value)
+            current_node = current_node.next
+            if current_node == self.head:
+                break
+    
+
+    # Searching for an Element in Circular Singly Linked List
+    # Time Complexity is O(n)
+    def search(self, target):
+        current_node = self.head
+        while current_node is not None:
+            if current_node.value == target:
+                return "Element Found"
+            current_node = current_node.next
+            if current_node == self.head:
+                break
+        return "Element not Found"
+    
+    # Get Method in Circular Linked List
+    # Time Complexity is O(n)
+    def get(self, index):
+        current_node = self.head
+        for _ in range(index):
+            current_node = current_node.next
+        return current_node
+    
+    
+
+
 
 
 
@@ -105,3 +145,7 @@ print(CLinkedList)
 CLinkedList.insert(-6, 60)
 print(CLinkedList.tail.value)
 print(CLinkedList)
+print(CLinkedList.traverse())
+print(CLinkedList.search(60))
+print(CLinkedList.search(70))
+print(CLinkedList.get(-3))
