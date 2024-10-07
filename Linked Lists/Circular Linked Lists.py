@@ -136,6 +136,24 @@ class Circular_linkedList:
             temp.value = value
             return True
         return False
+    
+    # Pop first Method
+    # Time Complexity is O(1)
+    def pop_first(self):
+        popped_Node = self.head
+        if self.length == 0:
+            return None
+        if self.length == 1:
+            self.head = None
+            self.head = None
+        else:
+            self.head = self.head.next
+            self.tail.next = self.head
+            popped_Node.next = None
+        self.length -= 1
+        return popped_Node
+
+
 
     
 
@@ -165,3 +183,5 @@ print(CLinkedList.get(-1))
 print(CLinkedList.set_value(-2, 100))
 print(CLinkedList)
 print(CLinkedList.get(-5))
+print(CLinkedList.pop_first())
+print(CLinkedList)
