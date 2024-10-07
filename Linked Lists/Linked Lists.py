@@ -59,9 +59,9 @@ class LinkedList:
     def insert(self, index, value):
         new_node = Node(value)
         if index < 0:
-            index = self.length + index     
-        if index < 0 or index > self.length:
-            return False   
+            index = self.length + index + 1    
+        if index > self.length:
+            index = self.length   
         if self.length == 0:
             self.head = new_node
             self.tail = new_node
@@ -100,11 +100,11 @@ class LinkedList:
     # Get Method 
     # Time Complexity is O(n)
     def get(self, index):
-        current_node = self.head
         if index < 0:
-            index = self.length + index
-        if index < 0 or index > self.length:
-            return False
+            index = self.length + index + 1
+        if index > self.length:
+            index = self.length
+        current_node = self.head
         for _ in range(index):
             current_node = current_node.next
         return current_node

@@ -119,11 +119,24 @@ class Circular_linkedList:
     # Get Method in Circular Linked List
     # Time Complexity is O(n)
     def get(self, index):
+        if index < 0:
+            index = self.length + index
+        if index > self.length:
+            index = self.length
         current_node = self.head
         for _ in range(index):
             current_node = current_node.next
         return current_node
     
+    # Set Method in Circular Linked List
+    # Time Complexity is O(n)
+    def set_value(self, index, value):
+        temp = self.get(index)
+        if temp is not None:
+            temp.value = value
+            return True
+        return False
+
     
 
 
@@ -142,10 +155,13 @@ CLinkedList.prepend(50)
 print(CLinkedList)
 CLinkedList.insert(0, 30)
 print(CLinkedList)
-CLinkedList.insert(-6, 60)
+CLinkedList.insert(-1, 60)
 print(CLinkedList.tail.value)
 print(CLinkedList)
 print(CLinkedList.traverse())
 print(CLinkedList.search(60))
 print(CLinkedList.search(70))
-print(CLinkedList.get(-3))
+print(CLinkedList.get(-1))
+print(CLinkedList.set_value(-2, 100))
+print(CLinkedList)
+print(CLinkedList.get(-5))
