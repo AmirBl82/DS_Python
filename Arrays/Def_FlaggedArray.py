@@ -18,7 +18,7 @@ class FlaggedArray:
             self.A[index] = value
             self.flag[index] = True  
         else:
-            print("Index isout of bounds")
+            print("Index is out of bounds")
 
     def remove(self, index):
         if 0 <= index < self.capacity and self.flag[index]: 
