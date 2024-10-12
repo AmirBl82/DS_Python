@@ -135,4 +135,4 @@ print(max_value)
 
 # Element Assignment
 arr12[2] = 20
-print(arr12)
+print(arr12) 
