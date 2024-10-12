@@ -133,4 +133,6 @@ arr12 = array('i', [25,5,10,16,17])
 max_value = max(arr12)
 print(max_value)
 
-
+# Element Assignment
+arr12[2] = 20
+print(arr12) 
