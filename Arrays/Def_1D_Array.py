@@ -28,7 +28,7 @@ class Array_1D:
 
     def delete(self,index):
         if self.isEmpty():
-            "Array is Empty"
+            return "Array is Empty"
 
         if index < 0:
             index = self.size + index + 1
