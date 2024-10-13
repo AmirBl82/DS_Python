@@ -36,7 +36,7 @@ class Array_1D:
         if index > self.size:
             index = self.size
         
-        for i in range(index,self.size-1):
+        for i in range(index,self.size):
             self.array[i-1] = self.array[i]
         
         self.array[self.size-1] = None
