@@ -19,7 +19,7 @@ class FlaggedArray:
                 self.array[i+1] = self.array[i]
             self.array[index] = value
             self.flag[index] = True  
-             
+            self.size += 1
         else:
             print("Index is out of bounds")
 
