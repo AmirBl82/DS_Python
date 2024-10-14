@@ -15,8 +15,11 @@ class FlaggedArray:
         if 0 <= index < self.capacity:
             if not self.flag[index]:  
                 self.size += 1  
+            for i in range (self.size-1,index-1,-1):
+                self.array[i+1] = self.array[i]
             self.array[index] = value
             self.flag[index] = True  
+             
         else:
             print("Index is out of bounds")
 
