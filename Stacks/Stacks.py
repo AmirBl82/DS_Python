@@ -3,7 +3,7 @@ class Stack:
     def __init__(self,maxSize,top):
         self.maxSize = maxSize
         self.__list = []
-        self.top = -1
+        self.__top = -1
     
     def __str__(self):
         values = self.__list.reverse()
@@ -33,7 +33,7 @@ class Stack:
             return "The Stack is Full"
         else:
             self.__list.append(value)
-            self.top += 1
+            self.__top += 1
             return "The Element has been successfully inserted"
     
     # Pop
@@ -43,7 +43,7 @@ class Stack:
             return "There is not any Element in the Stack"
         else:
             return self.__list.pop()
-            self.top -= 1
+            self.__top -= 1
     
     # Peek
     # Time Complexity is O(1)
@@ -64,6 +64,7 @@ class Stack:
         return len(self.__list)
     
     # Find Max
+    # Time Complexity is O(n)
     def findMax(self):
         if self.isEmpty():
             return "The Stack is Empty"
