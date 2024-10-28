@@ -1,8 +1,9 @@
 # Time Complexity of Stack Creation is O(1)
 class Stack:
-    def __init__(self,maxSize):
+    def __init__(self,maxSize,top):
         self.maxSize = maxSize
         self.__list = []
+        self.top = -1
     
     def __str__(self):
         values = self.__list.reverse()
@@ -41,6 +42,7 @@ class Stack:
             return "There is not any Element in the Stack"
         else:
             return self.__list.pop()
+            self.top -= 1
     
     # Peek
     # Time Complexity is O(1)
