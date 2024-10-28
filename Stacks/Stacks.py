@@ -33,6 +33,7 @@ class Stack:
             return "The Stack is Full"
         else:
             self.__list.append(value)
+            self.top += 1
             return "The Element has been successfully inserted"
     
     # Pop
@@ -62,6 +63,12 @@ class Stack:
     def getSize(self):
         return len(self.__list)
     
+    # Find Max
+    def findMax(self):
+        if self.isEmpty():
+            return "The Stack is Empty"
+        else:
+            return max(self.__list)
         
 
 new_stack = Stack(4)
