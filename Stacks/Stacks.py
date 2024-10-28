@@ -93,6 +93,23 @@ class Stack:
     
     return reversed_stack
         
+def findMaxOutside(stack):
+    if stack.isEmpty():
+        return "The Stack is Empty"
+    
+    max_value = stack.peek()
+    temp_stack = Stack(stack.getSize(), -1)
+    
+    while not stack.isEmpty():
+        value = stack.pop()
+        if value > max_value:
+            max_value = value
+        temp_stack.push(value)
+    
+    while not temp_stack.isEmpty():
+        stack.push(temp_stack.pop())
+    return max_value
+
 
 new_stack = Stack(4)
 print(new_stack.isEmpty())        
