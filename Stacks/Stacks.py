@@ -71,6 +71,28 @@ class Stack:
         else:
             return max(self.__list)
         
+    def merge(stack1, stack2):
+        merged_stack = Stack(stack1.maxSize + stack2.maxSize, -1)
+    
+        while not stack1.isEmpty() or not stack2.isEmpty():
+            if stack1.isEmpty():
+                merged_stack.push(stack2.pop())
+            elif stack2.isEmpty():
+                merged_stack.push(stack1.pop())
+            else:
+
+                if stack1.peek() > stack2.peek():
+                    merged_stack.push(stack1.pop())
+                else:
+                    merged_stack.push(stack2.pop())
+    
+
+    reversed_stack = Stack(merged_stack.getSize(), -1)
+    while not merged_stack.isEmpty():
+        reversed_stack.push(merged_stack.pop())
+    
+    return reversed_stack
+        
 
 new_stack = Stack(4)
 print(new_stack.isEmpty())        
