@@ -101,7 +101,7 @@ def merge(stack1, stack2):
             else:
                 merged_stack.push(stack2_copy.pop())
 
-    reversed_stack = Stack(merged_stack.getSize())
+    reversed_stack = Stack(merged_stack.maxSize)
     while not merged_stack.isEmpty():
         reversed_stack.push(merged_stack.pop())
 
