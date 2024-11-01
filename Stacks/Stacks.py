@@ -1,13 +1,12 @@
 # Time Complexity of Stack Creation is O(1)
 class Stack:
-    def __init__(self,maxSize,top):
+    def __init__(self,maxSize):
         self.maxSize = maxSize
         self.__list = []
         self.__top = -1
     
     def __str__(self):
-        values = self.__list.reverse()
-        values = [str(x) for x in self.__list]
+        values = [str(x) for x in reversed(self.__list)]
         return '\n'.join(values)
     
     # isEmpty
@@ -34,16 +33,16 @@ class Stack:
         else:
             self.__list.append(value)
             self.__top += 1
-            return "The Element has been successfully inserted"
     
     # Pop
     # Time Complexity is O(1)
     def pop(self):
         if self.isEmpty():
-            return "There is not any Element in the Stack"
+            return "The Stack is Empty"
         else:
-            return self.__list.pop()
             self.__top -= 1
+            return self.__list.pop()
+            
     
     # Peek
     # Time Complexity is O(1)
@@ -71,34 +70,50 @@ class Stack:
         else:
             return max(self.__list)
         
-    def merge(stack1, stack2):
-        merged_stack = Stack(stack1.maxSize + stack2.maxSize, -1)
+def copy_stack(original_stack):
+    temp_stack = Stack(original_stack.maxSize)
+    copy_stack = Stack(original_stack.maxSize)
+
+    while not original_stack.isEmpty():
+        temp_stack.push(original_stack.pop())
     
-        while not stack1.isEmpty() or not stack2.isEmpty():
-            if stack1.isEmpty():
-                merged_stack.push(stack2.pop())
-            elif stack2.isEmpty():
-                merged_stack.push(stack1.pop())
+    while not temp_stack.isEmpty():
+        item = temp_stack.pop()
+        original_stack.push(item)
+        copy_stack.push(item)
+
+    return copy_stack
+
+def merge(stack1, stack2):
+    stack1_copy = copy_stack(stack1)
+    stack2_copy = copy_stack(stack2)
+
+    merged_stack = Stack(stack1_copy.maxSize + stack2_copy.maxSize)
+
+    while not stack1_copy.isEmpty() or not stack2_copy.isEmpty():
+        if stack1_copy.isEmpty():
+            merged_stack.push(stack2_copy.pop())
+        elif stack2_copy.isEmpty():
+            merged_stack.push(stack1_copy.pop())
+        else:
+            if stack1_copy.peek() > stack2_copy.peek():
+                merged_stack.push(stack1_copy.pop())
             else:
+                merged_stack.push(stack2_copy.pop())
 
-                if stack1.peek() > stack2.peek():
-                    merged_stack.push(stack1.pop())
-                else:
-                    merged_stack.push(stack2.pop())
-    
-
-    reversed_stack = Stack(merged_stack.getSize(), -1)
+    reversed_stack = Stack(merged_stack.getSize())
     while not merged_stack.isEmpty():
         reversed_stack.push(merged_stack.pop())
-    
+
     return reversed_stack
-        
-def findMaxOutside(stack):
+
+
+def findMax(stack):
     if stack.isEmpty():
         return "The Stack is Empty"
     
     max_value = stack.peek()
-    temp_stack = Stack(stack.getSize(), -1)
+    temp_stack = Stack(stack.getSize())
     
     while not stack.isEmpty():
         value = stack.pop()
@@ -112,16 +127,30 @@ def findMaxOutside(stack):
 
 
 new_stack = Stack(4)
+
 print(new_stack.isEmpty())        
 print(new_stack.isFull())
 new_stack.push(1)
 new_stack.push(2)
 new_stack.push(3)
-new_stack.pop()
-# new_stack.delete()
-print(new_stack)
-print(new_stack.getSize())
+# new_stack.pop()
+# # new_stack.delete()
+# print(new_stack)
+# print(new_stack.getSize())
+# print(findMax(new_stack))
+# print(new_stack)
 
-
-        
+stack1 = Stack(4)
+stack2 = Stack(4)
+stack1.push(1)
+stack1.push(2)
+stack1.push(3)
+stack1.push(4)
+stack2.push(10)
+stack2.push(12)
+stack2.push(20)
+stack2.push(30)
+print(merge(stack1,stack2))
+print(stack1)
+print(stack2)
 
