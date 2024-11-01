@@ -113,7 +113,7 @@ def findMax(stack):
         return "The Stack is Empty"
     
     max_value = stack.peek()
-    temp_stack = Stack(stack.getSize())
+    temp_stack = Stack(stack.maxSize)
     
     while not stack.isEmpty():
         value = stack.pop()
@@ -137,7 +137,7 @@ new_stack.push(3)
 # # new_stack.delete()
 # print(new_stack)
 # print(new_stack.getSize())
-# print(findMax(new_stack))
+print(findMax(new_stack))
 # print(new_stack)
 
 stack1 = Stack(4)
