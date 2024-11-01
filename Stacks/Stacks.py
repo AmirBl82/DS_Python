@@ -70,17 +70,17 @@ class Stack:
         else:
             return max(self.__list)
         
-def copy_stack(original_stack):
-    temp_stack = Stack(original_stack.maxSize)
-    copy_stack = Stack(original_stack.maxSize)
+def copy_stack(org_stack):
+    temp_stack = Stack(org_stack.maxSize)
+    copy_stack = Stack(org_stack.maxSize)
 
-    while not original_stack.isEmpty():
-        temp_stack.push(original_stack.pop())
+    while not org_stack.isEmpty():
+        temp_stack.push(org_stack.pop())
     
     while not temp_stack.isEmpty():
-        item = temp_stack.pop()
-        original_stack.push(item)
-        copy_stack.push(item)
+        value = temp_stack.pop()
+        org_stack.push(value)
+        copy_stack.push(value)
 
     return copy_stack
 
