@@ -43,3 +43,7 @@ arr.print()
 
 arr.remove(3)  
 arr.print()  
+
+l = [2]
+l.append(2)
+print(l)
