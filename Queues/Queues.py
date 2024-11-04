@@ -1,8 +1,12 @@
 # Time Complexity of Queue Creation is O(1)
 class Queue:
-    def __init__(self,maxSize):
+    def __init__(self,maxSize,dataType)
         self.maxSize = maxSize
         self.__items = []
+        self.__rear = -1
+        self.front = -1
+        self.dataType = dataType
+        
     
     def __str__(self):
         values = [str(x) for x in self.__items]
@@ -24,21 +28,25 @@ class Queue:
         else:
             return False
     
-    # Enqueue(Queue append Method)
+    # Enqueue(Queue insert Method)
     # Time Complexity is O(1)
-    def enqueue(self,value):
+    def insert(self,value):
+        if not isinstance(value, self.dataType):
+            return f"Queue only accepts elements of type {self.dataType.__name__}"
+            
         if self.isFull():
             return "The Queue is Full"
         else:
             self.__items.append(value)
-            return "The Element is inserted at the End of Queue"
-    
-    # Dequeue(Queue pop Method)
+            self.__rear += 1
+
+    # Dequeue(Queue delete Method)
     # Time Complexity is O(1)
-    def dequeue(self):
+    def delete(self):
         if self.isEmpty():
             return "There is not any Element in the Queue"
         else:
+            self.__front += 1
             return self.__items.pop(0)
     
     # Peek
