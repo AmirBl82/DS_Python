@@ -12,18 +12,12 @@ class Stack:
     # isEmpty
     # Time Complexity is O(1)
     def isEmpty(self):
-        if self.__list == []:
-            return True
-        else:
-            return False
+        return self.__top == 1
     
     # isFull
     # Time Complexity is O(1)
     def isFull(self):
-        if len(self.__list) == self.maxSize:
-            return True
-        else:
-            return False
+        return self.__top == self.maxSize - 1
     
     # Push
     # Time Complexity is O(1)
