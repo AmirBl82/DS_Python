@@ -40,8 +40,8 @@ class Array_1D:
         if index > self.size:
             index = self.size
         
-        for i in range(index,self.size):
-            self.array[i-1] = self.array[i]
+        for i in range(index,self.size-1):
+            self.array[i] = self.array[i+1]
         
         self.array[self.size-1] = None
         self.size -= 1
@@ -52,6 +52,29 @@ class Array_1D:
     
 def get(arr, index):
     return arr.array[index]
+def AccessElement(array,index):
+    if index > len(array.array):
+        index = len(array) - 1
+    else:
+        print(array.array[index])
+
+def ArraySearch(array,target):
+    for i in range(array.size):
+        if array.array[i] == target:
+            return i
+    return "Element Not Found"
+
+def ArraySort(array):
+    if array.isEmpty():
+        return "Array is Empty"
+    sorted_array = sorted(array.array[:array.size])
+    for i in range(array.size):
+        array.array[i] = sorted_array[i]
+    return "Array Sorted"
+
+def ArrayTraverse(array):
+    for i in array.array:
+        print(i)
 
 arr = Array_1D(5)
 print(arr.insert(0,"s"))
