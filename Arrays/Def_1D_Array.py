@@ -1,8 +1,9 @@
 class Array_1D:
-    def __init__(self,capacity):
+    def __init__(self,capacity,dataType = int):
         self.capacity = capacity 
         self.array = [0] * capacity
         self.size = 0
+        self.dataType = dataType
     
     def isFull(self):
         return self.size == self.capacity
@@ -19,6 +20,9 @@ class Array_1D:
         
         if index > self.size:
             index = self.size
+        
+        if not isinstance(value,self.dataType):
+            return "Array only accept elemnts of type int"
         
         for i in range(self.size-1,index-1,-1):
             self.array[i+1] = self.array[i]
@@ -46,12 +50,16 @@ class Array_1D:
         print([self.array[i] for i in range(self.size)])
 
     
+def get(arr, index):
+    return arr.array[index]
+
 arr = Array_1D(5)
-arr.insert(0,10)
+print(arr.insert(0,"s"))
 arr.insert(1,11)
 arr.insert(2,12)
-arr.insert(1,22)
-arr.insert(-1,17)
-arr.delete(-1)
+arr.insert(8,22)
+arr.insert(2,13)
+arr.insert(2,14)
+print(get(arr,3))
+
 arr.display()
-print(arr.isFull())

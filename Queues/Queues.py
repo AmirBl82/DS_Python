@@ -1,6 +1,6 @@
 # Time Complexity of Queue Creation is O(1)
 class Queue:
-    def __init__(self,maxSize,dataType)
+    def __init__(self,maxSize,dataType):
         self.maxSize = maxSize
         self.__items = []
         self.__rear = -1
