@@ -52,6 +52,7 @@ class Array_1D:
     
 def get(arr, index):
     return arr.array[index]
+
 def AccessElement(array,index):
     if index > len(array.array):
         index = len(array) - 1
