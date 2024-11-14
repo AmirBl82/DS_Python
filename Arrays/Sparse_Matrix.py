@@ -49,10 +49,6 @@ class SparseMatrix:
                 return self.elements[i, 2]
         return 0  # Return 0 if element is not found
 
-    def is_full(self):
-        # Check if the matrix has reached its capacity
-        return self.size >= self.capacity
-
     def __str__(self):
         # Optional: visualize the matrix as a dense 2D array
         matrix_repr = np.zeros((self.rows, self.cols), dtype=int)

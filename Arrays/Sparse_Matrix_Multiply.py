@@ -22,6 +22,7 @@ def sparse_multiply(sparse_A, shape_A, sparse_B, shape_B):
     
     return np.array(sparse_result)
 
+
 sparse_A = np.array([
     [0, 0, 1],
     [0, 1, 2],

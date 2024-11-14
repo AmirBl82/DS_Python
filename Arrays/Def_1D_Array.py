@@ -22,7 +22,7 @@ class Array_1D:
             index = self.size
         
         if not isinstance(value,self.dataType):
-            return "Array only accept elemnts of type int"
+            return "Array only accepts elemnts of type int"
         
         for i in range(self.size-1,index-1,-1):
             self.array[i+1] = self.array[i]
@@ -77,6 +77,44 @@ def ArrayTraverse(array):
     for i in array.array:
         print(i)
 
+def ArrayReverse(array):
+    if array.isEmpty():
+        return "Array is Empty"
+    if array.size == 1:
+        return array
+    R_Array = Array_1D(array.capacity)
+    for i in range(array.size):
+        R_Array.insert(i,array.array[array.size - i -1])
+    return R_Array
+
+def Array_Divide(array1,array2):
+    if array1.size != array2.size:
+        return "Arrays Sizes are not Equal to Divide"
+    for i in range(array2.size):
+        if array2.array[i] == 0:
+            return "Division by zero cannot be done"
+    Divided_arr = Array_1D(array1.capacity, array1.dataType)
+    for i in range(array1.size):
+        Divided_arr.insert(i, array1.array[i] // array2.array[i])
+    return Divided_arr
+
+def Array_Multiply(array1,array2):
+    if array1.size != array2.size:
+        return "Arrays Sizes are not equal to Multiply"
+    Multiplied_arr = Array_1D(array1.capacity)
+    for i in range(array1.size):
+        Multiplied_arr.insert(i, array1.array[i] * array2.array[i])
+    return Multiplied_arr
+
+def Array_Pow(array1,array2):
+    if array1.size != array2.size:
+        return "Arrays Sizes are not equal to Pow"
+    Pow_arr = Array_1D(array1.capacity)
+    for i in range(array1.size):
+        Pow_arr.insert(i, array1.array[i] * array2.array[i])
+    return Pow_arr
+
+
 arr = Array_1D(5)
 print(arr.insert(0,"s"))
 arr.insert(1,11)
@@ -85,5 +123,18 @@ arr.insert(8,22)
 arr.insert(2,13)
 arr.insert(2,14)
 print(get(arr,3))
-
+r_arr = ArrayReverse(arr)
 arr.display()
+r_arr.display()
+
+arr1 = Array_1D(5)
+print(arr1.insert(0,"s"))
+arr1.insert(1,11)
+arr1.insert(2,12)
+arr1.insert(8,22)
+arr1.insert(2,13)
+arr1.insert(2,14)
+divided_arr = Array_Divide(arr,arr1)
+divided_arr.display()
+multip_arr = Array_Multiply(arr,arr1)
+multip_arr.display()
