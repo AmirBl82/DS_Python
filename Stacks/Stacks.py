@@ -67,15 +67,13 @@ class Stack:
 def copy_stack(org_stack):
     temp_stack = Stack(org_stack.maxSize)
     copy_stack = Stack(org_stack.maxSize)
-
     while not org_stack.isEmpty():
-        temp_stack.push(org_stack.pop())
-    
+        temp_stack.push(org_stack.pop())    
+        
     while not temp_stack.isEmpty():
         value = temp_stack.pop()
         org_stack.push(value)
         copy_stack.push(value)
-
     return copy_stack
 
 def merge(stack1, stack2):

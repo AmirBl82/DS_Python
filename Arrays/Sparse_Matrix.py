@@ -11,36 +11,37 @@ class SparseMatrix:
 
     def add(self, row, col, value):
         if value == 0:
-            print("Cannot add zero value to sparse matrix.")
-            return
+            return "Cannot add zero value to sparse matrix."
+
         if row >= self.rows or col >= self.cols or row < 0 or col < 0:
-            print("Position out of matrix bounds.")
-            return
+            return "Position out of matrix bounds."
+
         if self.size >= self.capacity:
-            print("Matrix capacity full. Cannot add more elements.")
-            return
+            return "Matrix capacity full. Cannot add more elements."
+
         
         # Check if element already exists, update if so
         for i in range(self.size):
             if self.elements[i, 0] == row and self.elements[i, 1] == col:
                 self.elements[i, 2] = value
-                print(f"Updated element at ({row}, {col}) with value {value}")
-                return
+                return "Element Updated"
         
         # Add new element
         self.elements[self.size] = [row, col, value]
         self.size += 1
-        print(f"Added {value} at position ({row}, {col})")
+        return "Element Added"
 
     def delete(self, row, col):
+        if self.size == 0:
+            return "Matrix is Empty nothing to delete"
         for i in range(self.size):
             if self.elements[i, 0] == row and self.elements[i, 1] == col:
                 # Shift elements up to fill the gap
                 self.elements[i:self.size-1] = self.elements[i+1:self.size]
                 self.size -= 1
-                print(f"Deleted element at position ({row}, {col})")
-                return
-        print("No element found at this position to delete.")
+                return "Element Deleted"
+        return "Element not Deleted"
+
     
     def get(self, row, col):
         # Retrieve the value at the specified row and column
@@ -61,7 +62,6 @@ class SparseMatrix:
 sparse_matrix = SparseMatrix(3, 3, capacity=2)
 sparse_matrix.add(0, 1, 5)
 sparse_matrix.add(2, 2, 10)
-print("Is matrix full?", sparse_matrix.is_full())  # True if capacity is reached
 print(sparse_matrix)
 print("Value at (0, 1):", sparse_matrix.get(0, 1))  
 print("Value at (1, 1):", sparse_matrix.get(1, 1))  
