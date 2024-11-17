@@ -12,16 +12,25 @@ class FlaggedArray:
         return self.size == 0 
 
     def insert(self, index, value):
-        if 0 <= index < self.capacity:
-            if not self.flag[index]:  
-                self.size += 1  
-            for i in range (self.size-1,index-1,-1):
-                self.array[i+1] = self.array[i]
+        if index < 0 or index >= self.capacity:
+            return "Index Out Of Bounds!"
+        
+        if self.is_full():
+            return "The Array is Full!"
+    
+        if not self.flag[index]:
             self.array[index] = value
-            self.flag[index] = True  
+            self.flag[index] = True
             self.size += 1
         else:
-            print("Index is out of bounds")
+            for i in range(self.capacity - 1, index, -1):
+                if self.flag[i - 1]:
+                    self.array[i] = self.array[i - 1]
+                    self.flag[i] = self.flag[i - 1]
+        self.array[index] = value
+        self.flag[index] = True
+        self.size += 1
+
 
     def remove(self, index):
         if 0 <= index < self.capacity and self.flag[index]: 
@@ -39,6 +48,7 @@ arr = FlaggedArray(10)
 
 arr.insert(3, 50)
 arr.insert(7, 61)    
+arr.insert(7, 62)  
 arr.print()  
 
 arr.remove(3)  

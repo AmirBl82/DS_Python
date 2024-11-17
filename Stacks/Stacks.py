@@ -12,7 +12,7 @@ class Stack:
     # isEmpty
     # Time Complexity is O(1)
     def isEmpty(self):
-        return self.__top == 1
+        return self.__top == -1
     
     # isFull
     # Time Complexity is O(1)
@@ -52,31 +52,29 @@ class Stack:
     def delete(self):
         self.__list = None
     
-    # getSize
-    # Time Complexity is O(1)
-    def getSize(self):
-        return len(self.__list)
+    # # getSize
+    # # Time Complexity is O(1)
+    # def getSize(self):
+    #     return len(self.__list)
     
-    # Find Max
-    # Time Complexity is O(n)
-    def findMax(self):
-        if self.isEmpty():
-            return "The Stack is Empty"
-        else:
-            return max(self.__list)
+    # # Find Max
+    # # Time Complexity is O(n)
+    # def findMax(self):
+    #     if self.isEmpty():
+    #         return "The Stack is Empty"
+    #     else:
+    #         return max(self.__list)
         
 def copy_stack(org_stack):
     temp_stack = Stack(org_stack.maxSize)
     copy_stack = Stack(org_stack.maxSize)
-
     while not org_stack.isEmpty():
-        temp_stack.push(org_stack.pop())
-    
+        temp_stack.push(org_stack.pop())    
+        
     while not temp_stack.isEmpty():
         value = temp_stack.pop()
         org_stack.push(value)
         copy_stack.push(value)
-
     return copy_stack
 
 def merge(stack1, stack2):

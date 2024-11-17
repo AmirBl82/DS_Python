@@ -6,6 +6,15 @@ def bubbleSort(list):
                 list[j], list[j+1] = list[j+1], list[j]
     print(list)
 
+def bubble_sort_recursive(arr,size = None):
+    if size is None:
+        size = len(arr)
+    if size == 1:
+        return 
+    for i in range(size-1):
+        if arr[i]>arr[i+1]:
+            arr[i],arr[i+1] = arr[i+1],arr[i]
+    bubble_sort_recursive(arr,size-1)
 # Time Complexity of Selection Sort is O(n^2)
 def selectionSort(list):
     for i in range(len(list)):
