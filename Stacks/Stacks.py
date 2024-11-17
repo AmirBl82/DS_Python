@@ -25,8 +25,9 @@ class Stack:
         if self.isFull():
             return "The Stack is Full"
         else:
-            self.__list.append(value)
             self.__top += 1
+            self.__list.append(value)
+            
     
     # Pop
     # Time Complexity is O(1)

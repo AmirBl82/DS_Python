@@ -1,32 +1,26 @@
 # Time Complexity of Queue Creation is O(1)
 class Queue:
-    def __init__(self,maxSize,dataType)
+    def __init__(self,maxSize,dataType = int):
         self.maxSize = maxSize
         self.__items = []
+        self.__front = -1
         self.__rear = -1
-        self.front = -1
         self.dataType = dataType
         
     
     def __str__(self):
-        values = [str(x) for x in self.__items]
+        values = [str(x) for x in self.__items if x is not None]
         return ' '.join(values)
     
     # isEmpty
     # Time Complexity is O(1)
     def isEmpty(self):
-        if self.__items == []:
-            return True
-        else:
-            return False
+        return self.__rear == self.__front
     
     # isFull
     # Time Complexity is O(1)
     def isFull(self):
-        if len(self.__items) == self.maxSize:
-            return True
-        else:
-            return False
+        return self.__rear == self.maxSize - 1
     
     # Enqueue(Queue insert Method)
     # Time Complexity is O(1)
@@ -37,8 +31,9 @@ class Queue:
         if self.isFull():
             return "The Queue is Full"
         else:
-            self.__items.append(value)
             self.__rear += 1
+            self.__items.append(value)
+            
 
     # Dequeue(Queue delete Method)
     # Time Complexity is O(1)
@@ -57,23 +52,19 @@ class Queue:
         else:
             return self.__items[0]
         
-    # Delete
-    # Time Complexity is O(1)
-    def delete(self):
-        self.__items = None
     
 new_queue = Queue(4)
 print(new_queue.isEmpty())
-new_queue.enqueue(1)
-new_queue.enqueue(2)
-new_queue.enqueue(3)
-new_queue.enqueue(4)
-new_queue.enqueue(5)
-new_queue.enqueue(6)
-print(new_queue.enqueue(7))
+new_queue.insert(1)
+new_queue.insert(2)
+new_queue.insert(3)
+new_queue.insert(4)
+new_queue.insert(5)
+new_queue.insert(6)
+print(new_queue.insert(7))
 print(new_queue)
-new_queue.dequeue()
-new_queue.dequeue()
+print(new_queue.delete())
+print(new_queue.delete())
 print(new_queue)
 print(new_queue.peek())
 new_queue.delete()
