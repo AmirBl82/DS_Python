@@ -1,6 +1,6 @@
 # Time Complexity of Queue Creation is O(1)
 class Queue:
-    def __init__(self,maxSize,dataType):
+    def __init__(self,maxSize,dataType = int):
         self.maxSize = maxSize
         self.__items = []
         self.__front = -1
@@ -26,10 +26,10 @@ class Queue:
     # Time Complexity is O(1)
     def insert(self,value):
         if not isinstance(value, self.dataType):
-            return f"Queue only accepts elements of type {self.dataType.__name__}"
+            raise TypeError(f"Queue only accepts elements of type {self.dataType}") 
             
         if self.isFull():
-            return "The Queue is Full"
+            raise OverflowError("The Queue is Full")
         else:
             self.__rear += 1
             self.__items.append(value)

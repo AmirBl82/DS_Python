@@ -1,50 +1,44 @@
 class Array_1D:
-    def __init__(self,capacity,dataType = int):
-        self.capacity = capacity 
-        self.array = [0] * capacity
+    def __init__(self, capacity, dataType=int):  
+        self.capacity = capacity
+        self.array = [None] * capacity  
         self.size = 0
         self.dataType = dataType
-    
+
     def isFull(self):
         return self.size == self.capacity
-               
+
     def isEmpty(self):
         return self.size == 0
-    
-    def insert(self,index,value):
-        if self.isFull():
-            return "Array is Full,Cannot insert."
-        
-        if index < 0:
-            index = self.size + index + 1
-        
-        if index > self.size:
-            index = self.size
-        
-        if not isinstance(value,self.dataType):
-            return "Array only accepts elemnts of type int"
-        
-        for i in range(self.size-1,index-1,-1):
-            self.array[i+1] = self.array[i]
-        
-        self.array[index] = value
-        self.size +=1
 
-    def delete(self,index):
+    def insert(self, index, value):
+        if not isinstance(value, self.dataType):
+            return "Array only accepts elements of type int"
+        
+        if self.isFull():
+            return "Array is Full, Cannot insert."
+
+        if index < 0 or index > self.size:  
+            return "Index out of bounds"
+
+        for i in range(self.size - 1, index - 1, -1):
+            self.array[i + 1] = self.array[i]
+
+        self.array[index] = value
+        self.size += 1
+
+    def delete(self, index):
         if self.isEmpty():
             return "Array is Empty"
 
-        if index < 0:
-            index = self.size + index + 1
-        
-        if index > self.size:
-            index = self.size
-        
-        for i in range(index,self.size-1):
-            self.array[i] = self.array[i+1]
-        
-        self.array[self.size-1] = None
-        self.size -= 1
+        if index < 0 or index >= self.size:
+            return "Index out of bounds"
+
+        for i in range(index, self.size - 1):
+            self.array[i] = self.array[i + 1]
+
+        self.size -= 1  
+        self.array[self.size] = None  
 
     def display(self):
         print([self.array[i] for i in range(self.size)])

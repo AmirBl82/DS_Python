@@ -24,10 +24,11 @@ class CircularQueue:
     # Enqueue (Queue append Method)
     # Time Complexity is O(1)
     def insert(self, value):
-        if not isinstance(value,self.dataType):
-            return "Queue only accepts element of type int"
+        if not isinstance(value, self.dataType):
+            raise TypeError(f"Queue only accepts elements of type {self.dataType}") 
+            
         if self.isFull():
-            return "The Queue is Full"
+            raise OverflowError("The Queue is Full")
         self.__rear = (self.__rear + 1) % self.maxSize
         self.__items[self.__rear] = value
 

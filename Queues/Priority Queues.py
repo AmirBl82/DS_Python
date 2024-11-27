@@ -17,10 +17,11 @@ class PriorityQueue:
         return self.__rear == self.maxSize - 1
     
     def insert(self,value,priority):
-        if not isinstance(value,self.dataType):
-            return "Queue only accepts elements of type int"
+        if not isinstance(value, self.dataType):
+            raise TypeError(f"Queue only accepts elements of type {self.dataType}")     
+        
         if self.isFull():
-            return "Queue is Full"
+            raise OverflowError("The Queue is Full")
         self.__rear = (self.__rear + 1) % self.maxSize
         self.__list.append([value,priority])
         self.__list.sort(key = lambda x:x[1])
