@@ -28,7 +28,7 @@ class CircularQueue:
             raise TypeError(f"Queue only accepts elements of type {self.dataType}") 
             
         if self.isFull():
-            raise OverflowError("The Queue is Full")
+            raise OverflowError("Queue is Full")
         self.__rear = (self.__rear + 1) % self.maxSize
         self.__items[self.__rear] = value
 

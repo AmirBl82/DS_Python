@@ -13,13 +13,13 @@ class Array_1D:
 
     def insert(self, index, value):
         if not isinstance(value, self.dataType):
-            return "Array only accepts elements of type int"
-        
+            raise TypeError(f"Array only accepts elements of type {self.dataType}") 
+            
         if self.isFull():
-            return "Array is Full, Cannot insert."
+            raise OverflowError("Array is Full")
 
         if index < 0 or index > self.size:  
-            return "Index out of bounds"
+            raise IndexError("Index out of Bounds")
 
         for i in range(self.size - 1, index - 1, -1):
             self.array[i + 1] = self.array[i]
@@ -31,8 +31,8 @@ class Array_1D:
         if self.isEmpty():
             return "Array is Empty"
 
-        if index < 0 or index >= self.size:
-            return "Index out of bounds"
+        if index < 0 or index > self.size:  
+            raise IndexError("Index out of Bounds")
 
         for i in range(index, self.size - 1):
             self.array[i] = self.array[i + 1]
@@ -110,7 +110,7 @@ def Array_Pow(array1,array2):
 
 
 arr = Array_1D(5)
-print(arr.insert(0,"s"))
+print(arr.insert(0,1))
 arr.insert(1,11)
 arr.insert(2,12)
 arr.insert(8,22)
