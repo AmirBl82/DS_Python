@@ -29,9 +29,9 @@ class Array_1D:
 
     def delete(self, index):
         if self.isEmpty():
-            return "Array is Empty"
+            raise ValueError("Array is Empty")
 
-        if index < 0 or index > self.size:  
+        if index < 0 or index >= self.size:
             raise IndexError("Index out of Bounds")
 
         for i in range(index, self.size - 1):
@@ -43,92 +43,93 @@ class Array_1D:
     def display(self):
         print([self.array[i] for i in range(self.size)])
 
-    
+
 def get(arr, index):
+    if index < 0 or index >= arr.size:
+        raise IndexError("Index out of Bounds")
     return arr.array[index]
 
-def AccessElement(array,index):
-    if index > len(array.array):
-        index = len(array) - 1
-    else:
-        print(array.array[index])
+def AccessElement(array, index):
+    if index < 0 or index >= array.size:
+        raise IndexError("Index out of Bounds")
+    return array.array[index]
 
-def ArraySearch(array,target):
+def ArraySearch(array, target):
     for i in range(array.size):
         if array.array[i] == target:
             return i
-    return "Element Not Found"
+    return -1
 
 def ArraySort(array):
     if array.isEmpty():
-        return "Array is Empty"
+        raise ValueError("Array is Empty")
     sorted_array = sorted(array.array[:array.size])
     for i in range(array.size):
         array.array[i] = sorted_array[i]
     return "Array Sorted"
 
 def ArrayTraverse(array):
-    for i in array.array:
-        print(i)
+    for i in range(array.size):
+        print(array.array[i])
 
 def ArrayReverse(array):
     if array.isEmpty():
-        return "Array is Empty"
-    if array.size == 1:
-        return array
-    R_Array = Array_1D(array.capacity)
+        raise ValueError("Array is Empty")
+    reversed_array = Array_1D(array.capacity, array.dataType)
     for i in range(array.size):
-        R_Array.insert(i,array.array[array.size - i -1])
-    return R_Array
+        reversed_array.insert(i, array.array[array.size - i - 1])
+    return reversed_array
 
-def Array_Divide(array1,array2):
+def Array_Divide(array1, array2):
     if array1.size != array2.size:
-        return "Arrays Sizes are not Equal to Divide"
-    for i in range(array2.size):
+        raise ValueError("Arrays Sizes are not Equal to Divide")
+    divided_array = Array_1D(array1.capacity, array1.dataType)
+    for i in range(array1.size):
         if array2.array[i] == 0:
-            return "Division by zero cannot be done"
-    Divided_arr = Array_1D(array1.capacity, array1.dataType)
-    for i in range(array1.size):
-        Divided_arr.insert(i, array1.array[i] // array2.array[i])
-    return Divided_arr
+            raise ZeroDivisionError("Division by zero cannot be done")
+        divided_array.insert(i, array1.array[i] // array2.array[i])
+    return divided_array
 
-def Array_Multiply(array1,array2):
+def Array_Multiply(array1, array2):
     if array1.size != array2.size:
-        return "Arrays Sizes are not equal to Multiply"
-    Multiplied_arr = Array_1D(array1.capacity)
+        raise ValueError("Arrays Sizes are not equal to Multiply")
+    multiplied_array = Array_1D(array1.capacity, array1.dataType)
     for i in range(array1.size):
-        Multiplied_arr.insert(i, array1.array[i] * array2.array[i])
-    return Multiplied_arr
+        multiplied_array.insert(i, array1.array[i] * array2.array[i])
+    return multiplied_array
 
-def Array_Pow(array1,array2):
+def Array_Pow(array1, array2):
     if array1.size != array2.size:
-        return "Arrays Sizes are not equal to Pow"
-    Pow_arr = Array_1D(array1.capacity)
+        raise ValueError("Arrays Sizes are not equal to Pow")
+    pow_array = Array_1D(array1.capacity, array1.dataType)
     for i in range(array1.size):
-        Pow_arr.insert(i, array1.array[i] * array2.array[i])
-    return Pow_arr
+        pow_array.insert(i, array1.array[i] ** array2.array[i])
+    return pow_array
 
 
-arr = Array_1D(5)
-print(arr.insert(0,1))
-arr.insert(1,11)
-arr.insert(2,12)
-arr.insert(8,22)
-arr.insert(2,13)
-arr.insert(2,14)
-print(get(arr,3))
+# Example usage
+arr = Array_1D(7)
+arr.insert(0, 1)
+arr.insert(1, 11)
+arr.insert(2, 12)
+arr.insert(1, 22)
+arr.insert(2, 13)
+arr.insert(2, 14)
+arr.display()
+arr.delete(2)
+print(get(arr, 3))
 r_arr = ArrayReverse(arr)
 arr.display()
 r_arr.display()
 
-arr1 = Array_1D(5)
-print(arr1.insert(0,"s"))
-arr1.insert(1,11)
-arr1.insert(2,12)
-arr1.insert(8,22)
-arr1.insert(2,13)
-arr1.insert(2,14)
-divided_arr = Array_Divide(arr,arr1)
+arr1 = Array_1D(7)
+arr1.insert(0, 1)
+arr1.insert(1, 11)
+arr1.insert(2, 12)
+arr1.insert(1, 22)
+arr1.insert(2, 13)
+arr1.insert(2, 14)
+divided_arr = Array_Divide(arr, arr1)
 divided_arr.display()
-multip_arr = Array_Multiply(arr,arr1)
+multip_arr = Array_Multiply(arr, arr1)
 multip_arr.display()
