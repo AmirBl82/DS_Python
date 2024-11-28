@@ -86,7 +86,7 @@ class LinkedList:
             if current_node.value == value:
                 return current_node  # Return the node itself (reference to the node)
             current_node = current_node.next
-        return "The Element does not exist"
+        raise ValueError("The Element does not exist")
 
     # Update the value of a node at a specific index
     def set_value(self, index, value):
@@ -106,6 +106,17 @@ class LinkedList:
         if self.__head:
             return self.__head
         return "Linked List is Empty"
+
+    def get_index(self, value):
+        current_node = self.__head
+        index = 0
+        while current_node:
+            if current_node.value == value:
+                return index
+            current_node = current_node.next
+            index += 1
+        raise ValueError("The element does not exist")
+
 
 linked_list = LinkedList()
 linked_list.insert(0, 10)
