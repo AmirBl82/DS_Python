@@ -87,34 +87,35 @@ class LinkedList:
         if index < 0 or index >= self.length:
             raise IndexError("Index out of bounds")
         if index == 0:
-            node_to_del = self.__head
+            deleted_node = self.__head
             self.__head = self.__head.next
         else:
             prev_node = self.get_value(index-1)
-            node_to_del = prev_node.next
-            prev_node.next = node_to_del.next
+            deleted_node = prev_node.next
+            prev_node.next = deleted_node.next
         
-        node_to_del.next = None
+        deleted_node.next = None
         self.length -= 1
-        return node_to_del
+        return deleted_node
     
-    def delete_byAddress(self,node_to_del):
-        if node_to_del is None:
+    def delete_byAddress(self, deleted_node):
+        if deleted_node is None:
             raise ValueError("Value cannot be None")
         
-        self.get_address(node_to_del.value)
-        if self.__head == node_to_del:
+        self.get_address(deleted_node.value)
+        if self.__head == deleted_node:
             self.__head = self.__head.next
         else:
             prev_node = self.__head
-            while prev_node and prev_node.next != node_to_del:
+            while prev_node and prev_node.next != deleted_node:
                 prev_node = prev_node.next
             
-            prev_node.next = node_to_del.next
+            if prev_node:
+                prev_node.next = deleted_node.next
         
-        node_to_del.next = None
+        deleted_node.next = None
         self.length -= 1
-        return node_to_del
+        return deleted_node
 
     # Delete all nodes in the linked list
     def delete_all(self):
