@@ -80,6 +80,8 @@ class LinkedList:
         raise ValueError("Element does not exist")
     
     def set_value(self, index, value):
+        if not isinstance(value, self.dataType):
+            raise TypeError(f"Linked List only accepts elements of type {self.dataType}")
         temp_node = self.get_value(index)
         if temp_node:
             temp_node.value = value
@@ -104,6 +106,8 @@ class LinkedList:
     def delete_byAddress(self, deleted_node):
         if deleted_node is None:
             raise ValueError("Value Cannot be None")
+        if self.__head is None:
+            raise ValueError("Linked List is empty")
         
         self.get_address(deleted_node.value)
         if self.__head == deleted_node:
@@ -123,6 +127,8 @@ class LinkedList:
     def delete_byPrevAddress(self, prev_node):
         if prev_node is None or prev_node.next is None:
             raise ValueError("Value Cannot be None")
+        if self.__head is None:
+            raise ValueError("Linked List is empty")
 
         deleted_node = prev_node.next
         prev_node.next = deleted_node.next
@@ -137,19 +143,12 @@ class LinkedList:
         if self.__head is None:
             raise ValueError("Linked List is empty")
 
-        if self.__head.value == x:
-            self.__head = self.__head.next
-            self.__length -= 1
-            return
+        try:
+            index = self.get_index(x)  
+            self.delete_byIndex(index)  
+        except ValueError:
+            raise ValueError("Value not found in the Linked List")
 
-        current_node = self.__head
-        while current_node.next:
-            if current_node.next.value == x:
-                current_node.next = current_node.next.next
-                self.__length -= 1
-                return
-            current_node = current_node.next
-        raise ValueError("Value not found in the Linked List")
 
 
     # Delete all nodes in the linked list
