@@ -163,6 +163,14 @@ class LinkedList:
             print(current_node.value)
             current_node = current_node.next
 
+def copy_LL(org_LL):
+    new_LL = LinkedList(org_LL.dataType)
+    current_node = org_LL.get_first()
+    while current_node:
+        new_LL.append(current_node.value)
+        current_node = current_node.next
+    return new_LL
+
 
 linked_list = LinkedList()
 linked_list.insert(0, 10)
