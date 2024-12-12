@@ -69,7 +69,7 @@ class LinkedList:
         current_node = self.__head
         for _ in range(index):
             current_node = current_node.next
-        return current_node
+        return current_node.value
     
     def get_address(self, value):
         current_node = self.__head
@@ -183,7 +183,7 @@ first_node = linked_list.get_first()
 
 print(id(node))
 print(id(node1))
-print(index.value)
+print(index)
 print(first_node.value)
 
 
