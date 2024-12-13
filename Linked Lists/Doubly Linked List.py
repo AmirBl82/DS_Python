@@ -9,31 +9,33 @@ class DoublyLinkedList:
         self.__head = None
         self.__length = 0
         self.dataType = dataType
-    
+
     def __str__(self):
-        temp_node = self.__head
+        if not self.__head:
+            return "Doubly Linked List is Empty"
         result = ""
+        temp_node = self.__head
         while temp_node:
             result += str(temp_node.value)
-            if temp_node.next is not None:
+            if temp_node.next:
                 result += " <-> "
             temp_node = temp_node.next
         return result
-    
+
     def get_length(self):
         return self.__length
-    
+
     def insert(self, index, value):
         if not isinstance(value, self.dataType):
-            raise TypeError(f"Doubly Linked List only accepts elements of type {self.dataType}")
-        
+            raise TypeError(f"Linked List only accepts elements of type {self.dataType}")
+
         if index < 0 or index > self.__length:
-            raise IndexError("Index out of bounds")
-        
+            raise IndexError("Index out of Bounds")
+
         new_node = Node(value)
-        if index == 0:  # Insert at the head
-            new_node.next = self.__head
+        if index == 0:
             if self.__head:
+                new_node.next = self.__head
                 self.__head.prev = new_node
             self.__head = new_node
         else:
@@ -45,20 +47,20 @@ class DoublyLinkedList:
             if temp_node.next:
                 temp_node.next.prev = new_node
             temp_node.next = new_node
-        
+
         self.__length += 1
-    
+
     def append(self, value):
         self.insert(self.__length, value)
-    
+
     def prepend(self, value):
         self.insert(0, value)
-    
+
     def get_first(self):
         if self.__head:
             return self.__head
-        return "Doubly Linked List is empty"
-    
+        return "Doubly Linked List is Empty"
+
     def get_index(self, value):
         current_node = self.__head
         index = 0
@@ -68,7 +70,7 @@ class DoublyLinkedList:
             current_node = current_node.next
             index += 1
         raise ValueError("Element does not exist")
-    
+
     def get_value(self, index):
         if index < 0 or index >= self.__length:
             raise IndexError("Index out of bounds")
@@ -76,20 +78,12 @@ class DoublyLinkedList:
         for _ in range(index):
             current_node = current_node.next
         return current_node
-    
-    def set_value(self, index, value):
-        if not isinstance(value, self.dataType):
-            raise TypeError(f"Doubly Linked List only accepts elements of type {self.dataType}")
-        temp_node = self.get_value(index)
-        if temp_node:
-            temp_node.value = value
-            return True
-        return False
-    
+
     def delete_byIndex(self, index):
         if index < 0 or index >= self.__length:
             raise IndexError("Index out of bounds")
-        if index == 0:  # Delete head
+
+        if index == 0:
             deleted_node = self.__head
             self.__head = self.__head.next
             if self.__head:
@@ -100,38 +94,57 @@ class DoublyLinkedList:
             temp_node.next = deleted_node.next
             if deleted_node.next:
                 deleted_node.next.prev = temp_node
-        
+
         deleted_node.next = None
         deleted_node.prev = None
         self.__length -= 1
         return deleted_node
-    
-    def delete_byValue(self, value):
-        if value is None:
-            raise ValueError("Value cannot be None")
+
+    def delete_byValue(self, x):
+        if x is None:
+            raise ValueError("x Cannot be None")
         if self.__head is None:
             raise ValueError("Doubly Linked List is empty")
-        
-        current_node = self.__head
-        while current_node:
-            if current_node.value == value:
-                if current_node.prev:
-                    current_node.prev.next = current_node.next
-                if current_node.next:
-                    current_node.next.prev = current_node.prev
-                if current_node == self.__head:
-                    self.__head = current_node.next
-                current_node.next = None
-                current_node.prev = None
-                self.__length -= 1
-                return current_node
-            current_node = current_node.next
-        raise ValueError("Value not found in the Doubly Linked List")
-    
-def copy_DLL(org_DLL):
-    new_DLL = DoublyLinkedList(org_DLL.dataType)
-    current_node = org_DLL.get_first()
-    while current_node:
-        new_DLL.append(current_node.value)
-        current_node = current_node.next
-    return new_DLL
+
+        try:
+            index = self.get_index(x)
+            self.delete_byIndex(index)
+        except ValueError:
+            raise ValueError("Value not found in the Doubly Linked List")
+
+    def delete_byAddress(self, deleted_node):
+        if deleted_node is None:
+            raise ValueError("Node cannot be None")
+        if self.__head is None:
+            raise ValueError("Doubly Linked List is empty")
+
+        if deleted_node == self.__head:
+            return self.delete_byIndex(0)
+
+        if deleted_node.prev:
+            deleted_node.prev.next = deleted_node.next
+        if deleted_node.next:
+            deleted_node.next.prev = deleted_node.prev
+
+        deleted_node.next = None
+        deleted_node.prev = None
+        self.__length -= 1
+        return deleted_node
+
+    def delete_byPrevAddress(self, prev_node):
+        if prev_node is None or prev_node.next is None:
+            raise ValueError("Invalid previous node or empty next reference")
+        if self.__head is None:
+            raise ValueError("Doubly Linked List is empty")
+
+        deleted_node = prev_node.next
+        prev_node.next = deleted_node.next
+        if deleted_node.next:
+            deleted_node.next.prev = prev_node
+
+        deleted_node.next = None
+        deleted_node.prev = None
+        self.__length -= 1
+        return deleted_node
+
+
