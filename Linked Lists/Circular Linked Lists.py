@@ -84,6 +84,23 @@ class CircularLinkedList:
             current_node = current_node.next
         return current_node.value
     
+    def get_address(self, value):
+        current_node = self.__head
+        while current_node:
+            if current_node.value == value:
+                return current_node
+            current_node = current_node.next
+        raise ValueError("Element does not exist")
+    
+    def set_value(self, index, value):
+        if not isinstance(value, self.dataType):
+            raise TypeError(f"Linked List only accepts elements of type {self.dataType}")
+        temp_node = self.get_value(index)
+        if temp_node:
+            temp_node.value = value
+            return True
+        return False
+    
     def delete_byIndex(self, index):
         if index < 0 or index >= self.__length:
             raise IndexError("Index out of bounds")
