@@ -50,7 +50,7 @@ class CircularLinkedList:
             temp_node.next = new_node
             if index == self.__length:  # Update tail if appended
                 self.__tail = new_node
-        
+                self.__tail.next = self.__head
         self.__length += 1
     
     def append(self, value):
@@ -120,6 +120,7 @@ class CircularLinkedList:
             prev_node.next = deleted_node.next
             if index == self.__length - 1:  # Update tail if last node is deleted
                 self.__tail = prev_node
+                
         
         deleted_node.next = None
         self.__length -= 1

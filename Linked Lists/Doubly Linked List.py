@@ -165,3 +165,8 @@ class DoublyLinkedList:
         return deleted_node
 
 
+Dll = DoublyLinkedList()
+Dll.insert(0,1)
+Dll.insert(1,2)
+Dll.insert(1,3)
+print(Dll)
