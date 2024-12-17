@@ -104,25 +104,25 @@ class LinkedList:
         return deleted_node
     
     def delete_byAddress(self, deleted_node):
-        if deleted_node is None:
-            raise ValueError("Value Cannot be None")
-        if self.__head is None:
+        if not deleted_node:
+            raise ValueError("Node cannot be None")
+        if not self.__head:
             raise ValueError("Linked List is empty")
-        
-        self.get_address(deleted_node.value)
+    
         if self.__head == deleted_node:
             self.__head = self.__head.next
         else:
             prev_node = self.__head
             while prev_node and prev_node.next != deleted_node:
                 prev_node = prev_node.next
-            
-            if prev_node:
-                prev_node.next = deleted_node.next
-        
+            if not prev_node:
+                raise ValueError("Node not found in the Linked List")
+            prev_node.next = deleted_node.next
+    
         deleted_node.next = None
         self.__length -= 1
         return deleted_node
+
     
     def delete_byPrevAddress(self, prev_node):
         if prev_node is None or prev_node.next is None:

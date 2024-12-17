@@ -78,6 +78,23 @@ class DoublyLinkedList:
         for _ in range(index):
             current_node = current_node.next
         return current_node
+    
+    def get_address(self, value):
+        current_node = self.__head
+        while current_node:
+            if current_node.value == value:
+                return current_node
+            current_node = current_node.next
+        raise ValueError("Element does not exist")
+    
+    def set_value(self, index, value):
+        if not isinstance(value, self.dataType):
+            raise TypeError(f"Linked List only accepts elements of type {self.dataType}")
+        temp_node = self.get_value(index)
+        if temp_node:
+            temp_node.value = value
+            return True
+        return False
 
     def delete_byIndex(self, index):
         if index < 0 or index >= self.__length:
@@ -148,3 +165,8 @@ class DoublyLinkedList:
         return deleted_node
 
 
+Dll = DoublyLinkedList()
+Dll.insert(0,1)
+Dll.insert(1,2)
+Dll.insert(1,3)
+print(Dll)
