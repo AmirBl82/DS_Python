@@ -24,11 +24,10 @@ class CircularQueue:
     # Enqueue (Queue append Method)
     # Time Complexity is O(1)
     def insert(self, value):
-        if not isinstance(value, self.dataType):
-            raise TypeError(f"Queue only accepts elements of type {self.dataType}") 
-            
         if self.isFull():
             raise OverflowError("Queue is Full")
+        if self.isEmpty():
+            self.__front = 0
         self.__rear = (self.__rear + 1) % self.maxSize
         self.__items[self.__rear] = value
 
@@ -36,12 +35,15 @@ class CircularQueue:
     # Time Complexity is O(1)
     def delete(self):
         if self.isEmpty():
-            return "There is not any Element in the Queue"
+            return "There is no element in the Queue"
+        
+        deleted_value = self.__items[self.__front]
+        self.__items[self.__front] = None
+        if self.__front == self.__rear:  
+            self.__front = self.__rear = -1  
         else:
             self.__front = (self.__front + 1) % self.maxSize
-            x = self.__items[self.__front]
-            self.__items[self.__front] = None
-            return x
+        return deleted_value
 
     # Peek
     # Time Complexity is O(1)
@@ -49,7 +51,7 @@ class CircularQueue:
         if self.isEmpty():
             return "There is not any Element in the Queue"
         else:
-            return self.__items[self.__front + 1]
+            return self.__items[self.__front]
 
     # Delete
     # Time Complexity is O(1)
