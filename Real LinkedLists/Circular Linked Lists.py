@@ -67,7 +67,6 @@ class CircularLinkedList:
         if deleted_node is None:
             raise ValueError("Cannot delete a Null Node")
         
-
         if deleted_node == self.head:
             self.head = self.head.next
             self.tail.next = self.head
