@@ -34,33 +34,37 @@ class CircularLinkedList:
     
     def get_address(self, value):
         current_node = self.head
-        while current_node:
-            if current_node.value == value:
-                return current_node
+        while current_node.next:
+            if current_node.next.value == value:
+                return current_node.next
             current_node = current_node.next
         raise ValueError("Element does not exist")
     
     def set_value(self, index, value):
         if not isinstance(value, self.dataType):
             raise TypeError(f"Linked List only accepts elements of type {self.dataType}")
-        temp_node = self.get_value(index)
-        if temp_node:
-            temp_node.value = value
+        current_node = self.get_value(index)
+        if current_node:
+            current_node.value = value
             return True
         return False
     
     def append(self, value):
         if not isinstance(value, self.dataType):
-            raise TypeError(f"Circular Linked List only accepts elements of type {self.dataType}")
+            raise TypeError(f"Linked List only accepts elements of type {self.dataType}")
         
         new_node = Node(value)
-        if self.head is None:
+        if self.head == None:
             self.head = self.tail = new_node
             new_node.next = self.head
-        else:
-            self.tail.next = new_node
-            new_node.next = self.head
-            self.tail = new_node
+            self.length += 1 
+            return
+        
+        current_node = self.head
+        while current_node.next != self.head:
+            current_node = current_node.next
+        current_node.next = new_node
+        new_node.next = self.head
         self.length += 1
     
     def delete(self, deleted_node):
@@ -76,7 +80,7 @@ class CircularLinkedList:
         current_node = self.head
         while current_node.next != self.head:  
             if current_node.next == deleted_node:
-                current_node.next = current_node.next.next
+                current_node.next = deleted_node.next
                 if current_node.next == self.head:  
                     self.tail = current_node
                 self.length -= 1
@@ -89,9 +93,7 @@ cll.append(1)
 cll.append(2)
 cll.append(3)
 cll.append(4)
-print(cll.length)
-node = cll.head.next.next.next
+print(cll)
+node = cll.head.next.next.next.next
 cll.delete(node)
 print(cll)
-print(node)
-print(cll.length)

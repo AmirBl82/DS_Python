@@ -26,32 +26,31 @@ class DoublyLinkedList:
         current_node = self.head
         for _ in range(index):
             current_node = current_node.next
-        return current_node    
-
-
+        return current_node
+    
     def get_address(self, value):
         current_node = self.head
-        while current_node:
-            if current_node.value == value:
-                return current_node
+        while current_node.next:
+            if current_node.next.value == value:
+                return current_node.next
             current_node = current_node.next
         raise ValueError("Element does not exist")
-
+    
     def set_value(self, index, value):
         if not isinstance(value, self.dataType):
-            raise TypeError(f"Doubly Linked List only accepts elements of type {self.dataType}")
-        temp_node = self.get_value(index)
-        if temp_node:
-            temp_node.value = value
+            raise TypeError(f"Linked List only accepts elements of type {self.dataType}")
+        current_node = self.get_value(index)
+        if current_node:
+            current_node.value = value
             return True
         return False
     
-    def append(self,value):
+    def append(self, value):
         if not isinstance(value, self.dataType):
-            raise TypeError(f"Doubly Linked List only accepts elements of type {self.dataType}")
+            raise TypeError(f"Linked List only accepts elements of type {self.dataType}")
         
         new_node = Node(value)
-        if self.head is None:
+        if self.head == None:
             self.head = new_node
             self.length += 1
             return
@@ -62,7 +61,7 @@ class DoublyLinkedList:
         current_node.next = new_node
         new_node.prev = current_node
         self.length += 1
-    
+
     def delete(self, deleted_node):
         if deleted_node is None:
             raise ValueError("Cannot delete a Null Node")
@@ -74,13 +73,14 @@ class DoublyLinkedList:
             self.length -= 1
             return
         
-        if deleted_node.next:
-            deleted_node.next.prev = deleted_node.prev
-        
-        if deleted_node.prev:
-            deleted_node.prev.next = deleted_node.next
-        
-        self.length -= 1
+        current_node = self.head
+        while current_node.next:
+            if current_node.next == deleted_node:
+                current_node.next.next.prev = current_node
+                current_node.next = deleted_node.next
+                self.length -= 1
+                return
+            current_node = current_node.next
 
 
 
