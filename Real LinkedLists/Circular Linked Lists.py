@@ -34,10 +34,14 @@ class CircularLinkedList:
     
     def get_address(self, value):
         current_node = self.head
-        while current_node.next:
-            if current_node.next.value == value:
-                return current_node.next
+        if not current_node:  
+            raise ValueError("List is empty")
+        while True:
+            if current_node.value == value:  
+                return current_node
             current_node = current_node.next
+            if current_node == self.head:  
+                break
         raise ValueError("Element does not exist")
     
     def set_value(self, index, value):
@@ -65,6 +69,7 @@ class CircularLinkedList:
             current_node = current_node.next
         current_node.next = new_node
         new_node.next = self.head
+        self.tail = new_node
         self.length += 1
     
     def delete(self, deleted_node):
@@ -81,7 +86,7 @@ class CircularLinkedList:
         while current_node.next != self.head:  
             if current_node.next == deleted_node:
                 current_node.next = deleted_node.next
-                if current_node.next == self.head:  
+                if deleted_node == self.tail:
                     self.tail = current_node
                 self.length -= 1
                 return
@@ -94,6 +99,8 @@ cll.append(2)
 cll.append(3)
 cll.append(4)
 print(cll)
-node = cll.head.next.next.next.next
+node = cll.tail
 cll.delete(node)
 print(cll)
+print(cll.tail.next.value)
+print(cll.get_address(3).value)
