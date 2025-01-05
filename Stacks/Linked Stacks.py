@@ -4,7 +4,7 @@ class Node:
         self.next = None
     
 class LinkedStack:
-    def __init__(self, dataType = int):
+    def __init__(self,dataType = int):
         self.top = None
         self.dataType = dataType
         self.size = 0
@@ -15,14 +15,14 @@ class LinkedStack:
         while current:
             elements.append(str(current.value))
             current = current.next
-        return " -> ".join(elements) if elements else "Stack is empty"
+        return "\n↓\n".join(elements) if elements else "Stack is empty"
     
     def isEmpty(self):
         return self.size == 0
     
     def push(self, value):
         if not isinstance(value, self.dataType):
-            raise TypeError(f"Queue only accepts elements of type {self.dataType}")
+            raise TypeError(f"Stack only accepts elements of type {self.dataType}")
         new_node = Node(value)
         new_node.next = self.top
         self.top = new_node
@@ -48,6 +48,6 @@ ls.push(1)
 ls.push(2)
 ls.push(3)
 print(ls)
-print(ls.size)
-print(ls.pop())
+print()
+ls.pop()
 print(ls)
