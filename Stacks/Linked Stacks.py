@@ -42,12 +42,48 @@ class LinkedStack:
         return self.top.value
     
 
+def del_odd(lstack):
+    lstack1 = LinkedStack()
+    current = lstack.top
+    while current:
+        if current.value % 2 == 0:
+            lstack1.push(current.value)
+        current = current.next
+    for _ in range(lstack.size):
+        lstack.pop()
+    
+    current1 = lstack1.top
+    while current1:
+        lstack.push(current1.value)
+        current1 = current1.next
+        lstack1.pop()
 
+
+def del_odd(lstack):
+    list = []
+    current = lstack.top
+    while current:
+        if current.value % 2 == 0:
+            list.append(current.value)
+        current = current.next
+    for _ in range(lstack.size):
+        lstack.pop()
+    
+    while list:
+        lstack.push(list.pop())
+        
 ls = LinkedStack()
-ls.push(1)
+ls.push(6)
 ls.push(2)
 ls.push(3)
+ls.push(4)
 print(ls)
 print()
-ls.pop()
+# ls.pop()
+# print(ls)
+del_odd(ls)
 print(ls)
+
+l = [1,2,3,4]
+l.pop(2)
+print(l)

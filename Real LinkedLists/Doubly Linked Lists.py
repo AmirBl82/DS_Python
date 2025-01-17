@@ -82,7 +82,18 @@ class DoublyLinkedList:
                 return
             current_node = current_node.next
 
-
+def reverse(dll):
+    list = []
+    current = dll.head
+    while current:
+        list.append(current.value)
+        current = current.next
+    current = dll.head
+    for _ in range(dll.length):
+        dll.delete(current)
+        current = current.next
+    while list:
+        dll.append(list.pop())
 
 dll = DoublyLinkedList()
 dll.append(1)
@@ -90,6 +101,7 @@ dll.append(2)
 dll.append(3)
 dll.append(4)
 print(dll)
-node = dll.head.next.next.next.prev
-dll.delete(node)
+# node = dll.head.next.next.next.prev
+# dll.delete(node)
+reverse(dll)
 print(dll)
