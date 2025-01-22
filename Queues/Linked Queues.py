@@ -49,7 +49,19 @@ class LinkedQueue:
         if self.isEmpty():
             return "Queue is Empty"
         return self.front.value
-    
+
+def sort(queue):
+    if queue.front is None or queue.front.next is None:
+        return
+
+    end = None
+    while end != queue.front:
+        current = queue.front
+        while current.next != end:
+            if current.value > current.next.value:
+                current.value, current.next.value = current.next.value, current.value
+            current = current.next
+        end = current
 
 lq = LinkedQueue()
 lq.insert(1)
